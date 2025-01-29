@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captcha Personalizado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        #mensagem {
+            display: none; /* Oculta a mensagem inicialmente */
+            margin-top: 10px;
+            font-weight: bold;
+            color: green;
+        }
+        #campoConfirmacao {
+            display: none; /* Oculta o campo de texto inicialmente */
+            margin-top: 10px;
+            padding: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Confirme que você não é um robô</h2>
+    <button onclick="copiarTexto()">Clique para copiar</button>
+
+    <p id="mensagem">Aperte <b>Ctrl + V</b> e <b>Enter</b> para confirmar que não é um robô.</p>
+    <input type="text" id="campoConfirmacao" placeholder="Cole aqui e aperte Enter" onkeypress="verificarEntrada(event)">
+
+    <p id="resultado"></p>
+
+    <script>
+        function copiarTexto() {
+            const comando = "EU-SOU-HUMANO"; // Define o texto que será copiado
+            
+            navigator.clipboard.writeText(comando).then(() => {
+                // Exibe a mensagem e o campo de confirmação
+                document.getElementById("mensagem").style.display = "block";
+                document.getElementById("campoConfirmacao").style.display = "inline-block";
+                document.getElementById("campoConfirmacao").focus(); // Foca no campo automaticamente
+            }).catch(err => {
+                console.error("Erro ao copiar texto: ", err);
+            });
+        }
+
+        function verificarEntrada(event) {
+            if (event.key === "Enter") {
+                const valorDigitado = document.getElementById("campoConfirmacao").value;
+                
+                if (valorDigitado === "EU-SOU-HUMANO") {
+                    document.getElementById("resultado").innerHTML = "<span style='color: green;'>✅ Verificado com sucesso!</span>";
+                } else {
+                    document.getElementById("resultado").innerHTML = "<span style='color: red;'>❌ Código incorreto. Tente novamente.</span>";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
